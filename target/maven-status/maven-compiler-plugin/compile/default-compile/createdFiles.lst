@@ -1,0 +1,7 @@
+util\AppConfig.class
+init\ApplicationContextInitializer.class
+init\ApplicationRootConfig.class
+action\dao\UserDao.class
+init\InitTransactionConfig.class
+init\intitSessionFactory.class
+action\bean\User.class
