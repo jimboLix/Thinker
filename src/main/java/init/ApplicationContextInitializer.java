@@ -12,19 +12,37 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
  * 这个实现又查找实现了WebApplicationInitializer接口的类。
  * Spring 3.2引入了一个WebApplicationInitializer的一个便利的基础实现类：
  * AbstractAnnotationConfigDispatcherServletInitializer。
- * 它会创建DispatcherServleContext和RootContext，现在只需扩展它即可。
+ * 它会创建DispactherServlet和ContextLoaderListener
  * @date 2017/10/11
  */
-public class ApplicationContextInitializer extends AbstractAnnotationConfigDispatcherServletInitializer{
+public class ApplicationContextInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+
+    /**
+     * 返回带有@Configuration注解的类将会创建ContextLocaderListener应用上下文中的bean
+     * @return
+     */
+    @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[]{ApplicationRootConfig.class,InitTransactionConfig.class};
+        return new Class[]{ApplicationRootConfig.class, InitTransactionConfig.class,IntitSessionFactory.class
+
+        };
     }
 
+    /**
+     * 返回带有@Configuration注解的类将会用来定义DispactherServlet应用上下文中的bean
+     * @return
+     */
+    @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[0];
+        return new Class[]{WebMvcInitializer.class};
     }
 
+    /**
+     * 配置SpringMvc的映射
+     * @return
+     */
+    @Override
     protected String[] getServletMappings() {
-        return new String[0];
+        return new String[]{"*.do"};
     }
 }

@@ -5,4 +5,7 @@
     <select id="getUserById" parameterType="java.lang.Integer" resultType="action.bean.User">
         select * FROM t_user  WHERE id=#{id}
     </select>
+    <insert id="save" parameterType="action.bean.User">
+        INSERT INTO t_user(id,name) VALUES (#{id},#{name});
+    </insert>
 </mapper>

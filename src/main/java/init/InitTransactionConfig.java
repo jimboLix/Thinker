@@ -7,6 +7,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.annotation.Resource;
+import javax.sql.DataSource;
 
 /**
  * @author ruihui.li
@@ -18,15 +19,10 @@ import javax.annotation.Resource;
 @EnableTransactionManagement
 public class InitTransactionConfig {
 
-    @Resource
-    private DruidDataSource dataSource;
-
-
     @Bean
-    public DataSourceTransactionManager initTransactionManager(){
+    public DataSourceTransactionManager transactionManager(DataSource dataSource){
         DataSourceTransactionManager dataSourceTransactionManager = new DataSourceTransactionManager();
         dataSourceTransactionManager.setDataSource(dataSource);
         return dataSourceTransactionManager;
     }
-
 }
