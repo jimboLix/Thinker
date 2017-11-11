@@ -11,4 +11,6 @@ import action.bean.User;
 public interface UserDao {
 
     User getUserById(Integer id);
+    void save(User user);
+
 }
