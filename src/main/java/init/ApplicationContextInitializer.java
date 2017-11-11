@@ -13,7 +13,8 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
  * Spring 3.2引入了一个WebApplicationInitializer的一个便利的基础实现类：
  * AbstractAnnotationConfigDispatcherServletInitializer。
  * 它会创建DispatcherServleContext和RootContext，现在只需扩展它即可。
- * @date 2017/10/11
+ * @date 2017/10/2
+ * 2
  */
 public class ApplicationContextInitializer extends AbstractAnnotationConfigDispatcherServletInitializer{
     protected Class<?>[] getRootConfigClasses() {
