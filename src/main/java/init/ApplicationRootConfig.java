@@ -1,10 +1,13 @@
 package init;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import common.session.HttpSessionProvider;
+import common.session.SessionProvider;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -48,4 +51,8 @@ public class ApplicationRootConfig {
         return dataSource;
     }
 
+    @Bean
+    public SessionProvider sessionProvider(){
+        return new HttpSessionProvider();
+    }
 }

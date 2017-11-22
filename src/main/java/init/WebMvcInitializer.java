@@ -1,14 +1,18 @@
 package init;
 
-import common.CustomExceptionHandler;
+import common.CustomerExceptionHandler;
+import common.CustomerHandlerInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.HandlerExceptionResolver;
+import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
@@ -30,7 +34,7 @@ import java.util.Properties;
 @Configuration
 @EnableWebMvc
 @ComponentScan("action.controller")
-public class WebMvcInitializer {
+public class WebMvcInitializer extends WebMvcConfigurerAdapter{
 
     @Bean
     public MultipartResolver multipartResolver() {
@@ -44,6 +48,7 @@ public class WebMvcInitializer {
 
     /**
      * 配置Freemarker的视图解析器
+     *
      * @return
      */
     @Bean
@@ -66,34 +71,30 @@ public class WebMvcInitializer {
      * 使用Freemarker还需要配置FreeMarkerConfigurer
      */
     @Bean
-    public FreeMarkerConfigurer freeMarkerConfigurer(){
+    public FreeMarkerConfigurer freeMarkerConfigurer() {
         FreeMarkerConfigurer freeMarkerConfigurer = new FreeMarkerConfigurer();
         freeMarkerConfigurer.setTemplateLoaderPath("/WEB-INF/");
         freeMarkerConfigurer.setDefaultEncoding("UTF-8");
         Properties properties = new Properties();
-        properties.put("datetime_format","yyyy-MM-dd HH:mm:ss");
-        properties.put("date_format","yyyy-MM-dd");
-        properties.put("time_format","HH:mm:ss");
+        properties.put("datetime_format", "yyyy-MM-dd HH:mm:ss");
+        properties.put("date_format", "yyyy-MM-dd");
+        properties.put("time_format", "HH:mm:ss");
         freeMarkerConfigurer.setFreemarkerSettings(properties);
         return freeMarkerConfigurer;
     }
 
-    /**
-     * 配置视图解析器
-     *
-     * @return
-     */
-//    @Bean
-//    public ViewResolver initViewResolver(){
-//        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-//        viewResolver.setPrefix("/WEB-INF/views");
-//        viewResolver.setSuffix(".jsp");
-//        return viewResolver;
-//    }
     @Bean
     public HandlerExceptionResolver handlerExceptionResolver() {
-        CustomExceptionHandler ceh = new CustomExceptionHandler();
-        return ceh;
+        return new CustomerExceptionHandler();
     }
 
+    @Bean
+    public HandlerInterceptor handlerInterceptor(){
+        return new CustomerHandlerInterceptor();
+    }
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        super.addInterceptors(registry);
+        registry.addInterceptor(handlerInterceptor()).addPathPatterns("/home/home.do");
+    }
 }

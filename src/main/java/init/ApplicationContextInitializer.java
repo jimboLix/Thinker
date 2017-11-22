@@ -24,8 +24,7 @@ public class ApplicationContextInitializer extends AbstractAnnotationConfigDispa
     @Override
     protected Class<?>[] getRootConfigClasses() {
         return new Class[]{ApplicationRootConfig.class, InitTransactionConfig.class,IntitSessionFactory.class
-
-        };
+        ,AopConfig.class};
     }
 
     /**
@@ -43,6 +42,6 @@ public class ApplicationContextInitializer extends AbstractAnnotationConfigDispa
      */
     @Override
     protected String[] getServletMappings() {
-        return new String[]{"*.do"};
+        return new String[]{"/"};
     }
 }

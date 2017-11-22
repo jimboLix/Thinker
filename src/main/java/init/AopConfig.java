@@ -1,6 +1,7 @@
 package init;
 
-import aop.AopCase;
+//import aop.AopCase;
+import common.CustomerAspectJ;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -16,7 +17,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 public class AopConfig {
 
     @Bean
-    public AopCase aopCase(){
-        return new AopCase();
+    public CustomerAspectJ customerAspectJ(){
+        return new CustomerAspectJ();
     }
 }
