@@ -5,4 +5,25 @@
     <select id="getUserById" parameterType="java.lang.Integer" resultType="action.bean.User">
         select * FROM t_user  WHERE id=#{id}
     </select>
+
+    <insert id="save" parameterType="action.bean.User">
+        INSERT INTO t_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null ">
+                id,
+            </if>
+            <if test="name != null and name !=''">
+                name,
+            </if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null ">
+                #{id},
+            </if>
+            <if test="name != null and name !=''">
+                #{name},
+            </if>
+        </trim>
+    </insert>
 </mapper>
