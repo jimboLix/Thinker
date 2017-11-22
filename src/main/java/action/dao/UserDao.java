@@ -9,8 +9,17 @@ import action.bean.User;
  * @date 2017/10/11
  */
 public interface UserDao {
-
+    /**
+     * 查询用户信息
+     * @param id
+     * @return
+     */
     User getUserById(Integer id);
+
+    /**
+     * 保存用户信息
+     * @param user
+     */
     void save(User user);
 
 }
