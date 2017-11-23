@@ -7,4 +7,8 @@ package init;
  * @date 2017/10/11
  */
 public class WebConfig {
+    public void test(){
+        System.out.println("-----------版本回退测试");
+    }
 }
+
