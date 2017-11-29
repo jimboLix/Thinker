@@ -1,6 +1,7 @@
 package common.session;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.Serializable;
 
 /**
@@ -16,7 +17,7 @@ public interface SessionProvider {
      * @param request
      * @return
      */
-    String getSessionId(HttpServletRequest request);
+    String getSessionId(HttpServletRequest request, HttpServletResponse response);
 
     /**
      * 向session中存放属性值
@@ -24,7 +25,7 @@ public interface SessionProvider {
      * @param attributeName 属性名称
      * @param value 值
      */
-    void setAttribute(HttpServletRequest request,String attributeName,Serializable value);
+    void setAttribute(HttpServletRequest request,HttpServletResponse response,String attributeName,Serializable value);
 
     /**
      * 获取session中的属性值
@@ -32,6 +33,6 @@ public interface SessionProvider {
      * @param attributeName 属性名称
      * @return 属性值
      */
-    Serializable getAttribute(HttpServletRequest request,String attributeName);
+    Serializable getAttribute(HttpServletRequest request,HttpServletResponse response,String attributeName);
 
 }
