@@ -2,6 +2,7 @@ package init;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import common.session.HttpSessionProvider;
+import common.session.RedisCacheSessionProvider;
 import common.session.SessionProvider;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.annotation.Bean;
@@ -53,6 +54,7 @@ public class ApplicationRootConfig {
 
     @Bean
     public SessionProvider sessionProvider(){
-        return new HttpSessionProvider();
+//        return new HttpSessionProvider();
+        return new RedisCacheSessionProvider();
     }
 }

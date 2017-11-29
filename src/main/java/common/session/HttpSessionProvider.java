@@ -1,6 +1,7 @@
 package common.session;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.Serializable;
 
@@ -12,19 +13,19 @@ import java.io.Serializable;
  */
 public class HttpSessionProvider implements SessionProvider {
     @Override
-    public String getSessionId(HttpServletRequest request) {
+    public String getSessionId(HttpServletRequest request, HttpServletResponse response) {
         return request.getRequestedSessionId();
     }
 
     @Override
-    public void setAttribute(HttpServletRequest request, String attributeName, Serializable value) {
+    public void setAttribute(HttpServletRequest request,HttpServletResponse response, String attributeName, Serializable value) {
         //如果不存在session，则创建
         HttpSession session = request.getSession(true);
         session.setAttribute(attributeName, value);
     }
 
     @Override
-    public Serializable getAttribute(HttpServletRequest request, String attributeName) {
+    public Serializable getAttribute(HttpServletRequest request,HttpServletResponse response, String attributeName) {
         //如果session不存在，则不创建
         HttpSession session = request.getSession(false);
         return null == session ? null : (Serializable) session.getAttribute(attributeName);

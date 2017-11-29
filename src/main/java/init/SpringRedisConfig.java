@@ -7,6 +7,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import redis.clients.jedis.JedisPoolConfig;
 import util.AppConfig;
 
+import java.io.Serializable;
+
 /**
  * @author ruihui.li
  * @version V1.0
@@ -40,20 +42,20 @@ public class SpringRedisConfig {
 
     //②redis的连接工厂
     @Bean
-    public JedisConnectionFactory jedisConnectionFactory(){
+    public JedisConnectionFactory jedisConnectionFactory(JedisPoolConfig jedisPoolConfig){
         JedisConnectionFactory connectionFactory = new JedisConnectionFactory();
         connectionFactory.setHostName(AppConfig.getProperty("redis.hostName"));
         connectionFactory.setPort(Integer.valueOf(AppConfig.getProperty("redis.port")));
         connectionFactory.setPassword(AppConfig.getProperty("redis.passWord"));
-        connectionFactory.setPoolConfig(jedisPoolConfig());
+        connectionFactory.setPoolConfig(jedisPoolConfig);
         return connectionFactory;
     }
 
     //③对redis操作封装的redisTemplate配置
     @Bean
-    public RedisTemplate redisTemplate(){
-        RedisTemplate redisTemplate = new RedisTemplate();
-        redisTemplate.setConnectionFactory(jedisConnectionFactory());
+    public RedisTemplate<String,Serializable> redisTemplate(JedisConnectionFactory jedisConnectionFactory){
+        RedisTemplate<String,Serializable> redisTemplate = new RedisTemplate<String,Serializable>();
+        redisTemplate.setConnectionFactory(jedisConnectionFactory);
         return redisTemplate;
     }
 }

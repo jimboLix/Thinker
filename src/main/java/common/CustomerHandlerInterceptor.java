@@ -30,7 +30,7 @@ public class CustomerHandlerInterceptor implements HandlerInterceptor {
         }
         //判断是否需要拦截
         if (requestURI.endsWith(ConstansUtil.INTERCEPT_URI)) {
-            Serializable userName = sessionProvider.getAttribute(request, ConstansUtil.USER_ON_SESSION_NAME);
+            Serializable userName = sessionProvider.getAttribute(request,response, ConstansUtil.USER_ON_SESSION_NAME);
             if (null == userName) {
                 response.sendRedirect("/thinker/home/login.do");
                 return false;
