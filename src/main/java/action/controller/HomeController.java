@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import util.ConstansUtil;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author ruihui.li
@@ -43,10 +44,10 @@ public class HomeController {
     }
 
     @RequestMapping("/doLogin.do")
-    public String doLogin(Integer id, HttpServletRequest request)throws Exception{
+    public String doLogin(Integer id, HttpServletRequest request, HttpServletResponse response)throws Exception{
         User user = userService.getUserById(id);
         if(null != user){
-            sessionProvider.setAttribute(request, ConstansUtil.USER_ON_SESSION_NAME,user.getName());
+            sessionProvider.setAttribute(request,response, ConstansUtil.USER_ON_SESSION_NAME,user.getName());
         }
         return "redirect:login.do";
     }
