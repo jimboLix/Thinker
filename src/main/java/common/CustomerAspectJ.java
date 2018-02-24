@@ -40,7 +40,6 @@ public class CustomerAspectJ {
         }
 
         key.append(stringWriter.toString());
-        System.out.println("key is -----------"+key.toString());
         return  pj.proceed();
     }
 
