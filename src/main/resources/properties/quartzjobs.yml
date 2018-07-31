@@ -1,0 +1,7 @@
+jobs:
+  - name: 'getUserById'
+    clazz: 'action.service.impl.UserServiceImpl'
+    method: 'getUserById'
+    args: ~
+    time: '0 0/5 * * * ?'
+    enable: true

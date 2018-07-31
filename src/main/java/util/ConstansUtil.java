@@ -12,6 +12,6 @@ public class ConstansUtil {
 
     public static final String USER_ON_SESSION_NAME = "user";
 
-    public static final String LOGINURL = "/home/login.do";
+    public static final String LOGINURL = "/home/get.do";
     public static final String DOLOGINURL = "/home/doLogin.do";
 }
